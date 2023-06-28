@@ -1,12 +1,11 @@
 const express = require('express');
-const MoviesService = require('../services/movies.service')
+const MoviesService = require('../services/movies.service');
 const router = express.Router();
 
 const moviesService = new MoviesService();
 
 router.get('/', async (req, res) => {
-    const movies = await moviesService.find();
-    console.log(movies);
+    const movies = await moviesService.find();  
     res.json(movies);
 });
 

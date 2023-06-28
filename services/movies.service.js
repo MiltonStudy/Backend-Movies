@@ -49,7 +49,6 @@ class MoviesService {
         const connection = await getConnection();
 
         try {
-
             const movieResult = await connection.query(`SELECT id_movie FROM movies WHERE id_movie = ${movie.id}`);
 
             if (!(Object.keys(movieResult).length === 0)) {
@@ -64,7 +63,7 @@ class MoviesService {
 
                 return {
                     "message": "Pelicula actualizada con exito",
-                    "data": await this.findOne(movie.id)
+                    "data": await this.findOne(result.id)
                 };
             }
 
@@ -84,7 +83,7 @@ class MoviesService {
                 await connection.query(`DELETE FROM movies WHERE id_movie = ${id}`);
                 return {
                     id,
-                    "message": "Pelicula eliminada"
+                    "message": "Pelicula eliminada con exito"
                 };
             }
 
