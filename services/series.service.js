@@ -11,7 +11,8 @@ class SeriesService {
                 '${serie.description}',
                 '${serie.fechaEstreno}',
                 '${serie.numeroCapitulos}',
-                '${serie.numeroTemporadas}'
+                '${serie.numeroTemporadas}',
+                '${serie.urlImagen}'
             );`
         );
 
@@ -58,7 +59,8 @@ class SeriesService {
                     description = '${serie.description}',
                     fecha_estreno = '${serie.fechaEstreno}',
                     numero_capitulos = ${serie.numeroCapitulos},
-                    numero_temporadas = ${serie.numeroTemporadas}
+                    numero_temporadas = ${serie.numeroTemporadas},
+                    url_imagen = '${serie.urlImagen}'
                     WHERE id_serie = ${serie.id};`
                 );
 

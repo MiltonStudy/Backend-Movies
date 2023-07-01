@@ -21,7 +21,8 @@ router.post('/', async (req, res) => {
         "description": req.body.description,
         "fechaEstreno": req.body.fechaEstreno,
         "numeroCapitulos": req.body.numeroCapitulos,
-        "numeroTemporadas": req.body.numeroTemporadas
+        "numeroTemporadas": req.body.numeroTemporadas,
+        "urlImagen": req.body.urlImagen
     };
 
     const newSerie = await seriesService.create(serie);
@@ -36,7 +37,8 @@ router.put('/:id', async (req, res) => {
         "description": req.body.description,
         "fechaEstreno": req.body.fechaEstreno,
         "numeroCapitulos": req.body.numeroCapitulos,
-        "numeroTemporadas": req.body.numeroTemporadas
+        "numeroTemporadas": req.body.numeroTemporadas,
+        "urlImagen": req.body.urlImagen
     };
 
     const updateSerie = await seriesService.update(serie);
