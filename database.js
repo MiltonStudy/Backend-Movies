@@ -1,11 +1,15 @@
-const mysql = require('promise-mysql');
+var conn = require('mysql2-promise')();
 const config = require('./config');
-
-const conn = mysql.createConnection({
+ 
+conn.configure({
     host: config.host,
+    port: config.port,
     database: config.database,
     user: config.user,
-    password: config.password
+    password: config.password,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 const getConnection = () => {

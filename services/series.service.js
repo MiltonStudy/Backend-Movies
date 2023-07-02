@@ -26,8 +26,8 @@ class SeriesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query('SELECT * FROM series;');
-            return result;
+            const [rows, fields] = await connection.query('SELECT * FROM series;');
+            return rows;
         } catch (exception) {
             console.log(exception);
         }
@@ -37,9 +37,9 @@ class SeriesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query(`SELECT * FROM series WHERE id_serie = ${id}`);
+            const [rows, fields] = await connection.query(`SELECT * FROM series WHERE id_serie = ${id}`);
 
-            if (!(Object.keys(result).length === 0)) { return result }
+            if (!(Object.keys(rows).length === 0)) { return rows }
 
             return { "message": "Serie no encontrada" };
         } catch (exception) {
@@ -51,9 +51,9 @@ class SeriesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query(`SELECT id_serie from series WHERE id_serie = ${serie.id}`);
+            const [rows, fields] = await connection.query(`SELECT id_serie from series WHERE id_serie = ${serie.id}`);
 
-            if (!(Object.keys(result).length === 0)) {
+            if (!(Object.keys(rows).length === 0)) {
                 const result = await connection.query(
                     `UPDATE series SET serie = '${serie.serie}',
                     description = '${serie.description}',
@@ -80,9 +80,9 @@ class SeriesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query(`SELECT id_serie FROM series WHERE id_serie = ${id}`);
+            const [rows, fields] = await connection.query(`SELECT id_serie FROM series WHERE id_serie = ${id}`);
 
-            if (!(Object.keys(result).length === 0)) {
+            if (!(Object.keys(rows).length === 0)) {
                 await connection.query(`DELETE FROM series WHERE id_serie = ${id}`);
                 return {
                     id,

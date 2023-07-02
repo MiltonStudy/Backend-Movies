@@ -1,4 +1,4 @@
-const { getConnection } = require('./../database')
+const { getConnection } = require('./../database');
 
 class MoviesService {
 
@@ -24,8 +24,8 @@ class MoviesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query("SELECT * FROM movies;");
-            return result;
+            const [rows, fields] = await connection.query("SELECT * FROM movies;");
+            return rows;
         } catch (exception) {
             console.log(exception);
         }
@@ -35,9 +35,9 @@ class MoviesService {
         const connection = await getConnection();
 
         try {
-            const result = await connection.query(`SELECT * FROM movies WHERE id_movie = ${id}`);
+            const [rows, fields] = await connection.query(`SELECT * FROM movies WHERE id_movie = ${id}`);
 
-            if (!(Object.keys(result).length === 0)) { return result; }
+            if (!(Object.keys(rows).length === 0)) { return rows; }
 
             return { "message": "Pelicula no encontrada" };
         } catch (exception) {
@@ -49,9 +49,9 @@ class MoviesService {
         const connection = await getConnection();
 
         try {
-            const movieResult = await connection.query(`SELECT id_movie FROM movies WHERE id_movie = ${movie.id}`);
+            const [rows, fields] = await connection.query(`SELECT id_movie FROM movies WHERE id_movie = ${movie.id}`);
 
-            if (!(Object.keys(movieResult).length === 0)) {
+            if (!(Object.keys(rows).length === 0)) {
                 const result = await connection.query(
                     `UPDATE movies SET movie = '${movie.movie}',
                     description = '${movie.description}',
@@ -77,9 +77,9 @@ class MoviesService {
         const connection = await getConnection();
 
         try {
-            const movieResult = await connection.query(`SELECT id_movie FROM movies WHERE id_movie = ${id}`);
+            const [rows, fields] = await connection.query(`SELECT id_movie FROM movies WHERE id_movie = ${id}`);
 
-            if (!(Object.keys(movieResult).length === 0)) {
+            if (!(Object.keys(rows).length === 0)) {
                 await connection.query(`DELETE FROM movies WHERE id_movie = ${id}`);
                 return {
                     id,
